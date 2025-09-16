@@ -4,7 +4,7 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
-  resolve: {
+  resolve: { 
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
       "@assets": path.resolve(import.meta.dirname, "attached_assets"),
