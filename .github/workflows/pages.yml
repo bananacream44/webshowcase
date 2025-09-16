@@ -1,15 +1,19 @@
 name: Deploy to GitHub Pages
+
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 concurrency:
   group: "pages"
   cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -41,10 +45,14 @@ jobs:
       - name: Create 404 fallback
         run: cp dist/public/index.html dist/public/404.html
         
+      - name: Create .nojekyll file
+        run: touch dist/public/.nojekyll
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist/public
+
   deploy:
     environment:
       name: github-pages
