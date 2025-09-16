@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages""
+  group: "pages"
   cancel-in-progress: false
 
 jobs:
@@ -46,20 +46,7 @@ jobs:
         run: mkdir -p test-dist
         
       - name: Create simple test page
-        run: |
-          cat > test-dist/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html>
-          <head>
-              <title>GitHub Pages Test</title>
-          </head>
-          <body>
-              <h1>SUCCESS!</h1>
-              <p>GitHub Pages is working for this repository!</p>
-              <p>Repository: ${{ github.repository }}</p>
-          </body>
-          </html>
-          EOF
+        run: echo '<html><head><title>Test</title></head><body><h1>SUCCESS!</h1><p>GitHub Pages works!</p></body></html>' > test-dist/index.html
         
       - name: Create .nojekyll file
         run: touch test-dist/.nojekyll
