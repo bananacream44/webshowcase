@@ -1,6 +1,6 @@
 # GitHub Deployment Instructions
 
-This portfolio is ready for deployment to GitHub Pages as a static site. All animations, images, and functionality are preserved.
+This portfolio is ready for deployment to  GitHub Pages as a static site. All animations, images, and functionality are preserved.
 
 ## Setup Instructions
 
