@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: "pages""
   cancel-in-progress: false
 
 jobs:
@@ -20,6 +20,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        
       - name: Setup Pages
         uses: actions/configure-pages@v5
         
@@ -41,19 +42,31 @@ jobs:
             echo "base=/${{ github.event.repository.name }}/" >> $GITHUB_OUTPUT
           fi
         
-      - name: Build frontend
-        run: npx vite build --config vite.github.config.ts --base="${{ steps.base.outputs.base }}"
+      - name: Create test directory
+        run: mkdir -p test-dist
         
-      - name: Create 404 fallback
-        run: cp dist/index.html dist/404.html
+      - name: Create simple test page
+        run: |
+          echo '<!DOCTYPE html>
+          <html>
+          <head>
+              <title>GitHub Pages Test</title>
+          </head>
+          <body>
+              <h1>SUCCESS!</h1>
+              <p>GitHub Pages is working for this repository!</p>
+              <p>Repository: ${{ github.repository }}</p>
+              <p>Deployment time: $(date)</p>
+          </body>
+          </html>' > test-dist/index.html
         
       - name: Create .nojekyll file
-        run: touch dist/.nojekyll
+        run: touch test-dist/.nojekyll
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./test-dist
 
   deploy:
     environment:
