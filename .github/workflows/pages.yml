@@ -45,15 +45,15 @@ jobs:
         run: npx vite build --config vite.github.config.ts --base="${{ steps.base.outputs.base }}"
         
       - name: Create 404 fallback
-        run: cp dist/public/index.html dist/public/404.html
+        run: cp dist/index.html dist/404.html
         
       - name: Create .nojekyll file
-        run: touch dist/public/.nojekyll
+        run: touch dist/.nojekyll
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/public
+          path: ./dist
 
   deploy:
     environment:
